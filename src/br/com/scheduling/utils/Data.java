@@ -14,13 +14,12 @@ import br.com.scheduling.model.Job;
  *
  */
 public class Data {	
+	static Calendar cal = Calendar.getInstance();
 	private static Date execWindowStart = null;
 	private static Date execWindowEnd = null;
 	
 	public static Date getExecWindowStart() {
-		if (execWindowStart == null) {
-			Calendar cal = Calendar.getInstance();
-			
+		if (execWindowStart == null) {			
 			cal.set(2020, 11, 03, 00, 00, 00);
 			execWindowStart = cal.getTime();
 		}
@@ -30,8 +29,6 @@ public class Data {
 	
 	public static Date getExecWindowEnd() {
 		if (execWindowEnd == null) {
-			Calendar cal = Calendar.getInstance();
-			
 			cal.set(2020, 11, 04, 23, 00, 00);
 			execWindowEnd = cal.getTime();
 		}
@@ -44,9 +41,7 @@ public class Data {
 	 * 
 	 * @return Todos os jobs
 	 */
-	public static List<Job> getAllJobs(){
-		Calendar cal = Calendar.getInstance();
-		
+	public static List<Job> getAllJobs(){		
 		cal.set(2020, 11, 03, 07, 50, 00);
 		Job job1 = new Job(1, "job1", cal.getTime(), 5);
 		
@@ -69,8 +64,10 @@ public class Data {
 		jobs.add(job4);
 		jobs.add(job5);
 		
+		System.out.println("Start: "+getExecWindowStart()+" - End: "+getExecWindowEnd());
+		
 		System.out.println("Jobs sem processamento");
-		jobs.stream().forEach(j -> System.out.println(j.getDescription()+" - "+j.getMaxDateConclusion()));
+		jobs.stream().forEach(j -> System.out.println(j.getDescription()+" - "+j.getMaxDateConclusion()+" -> "+j.getEstimatedExecTime()+"h"));
 		
 		return jobs;
 	}
